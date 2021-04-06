@@ -150,4 +150,11 @@
         </plugins>
     </build>
 
+    <developers>
+	<developer>
+		<name>Guilherme Villote</name>
+		<email>villote.guilherme@eb.mil.br</email>
+	</developer>
+    </developers>
+
 </project>
