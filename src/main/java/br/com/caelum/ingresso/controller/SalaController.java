@@ -1,7 +1,14 @@
 package br.com.caelum.ingresso.controller;
 
 import br.com.caelum.ingresso.dao.SalaDao;
+import br.com.caelum.ingresso.dao.SessaoDao;
+
+import java.util.List;
+
 import br.com.caelum.ingresso.model.Sala;
+import br.com.caelum.ingresso.model.Sessao;
+import br.com.caelum.ingresso.model.Filme;
+
 import br.com.caelum.ingresso.model.form.SalaForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +29,9 @@ public class SalaController {
 
     @Autowired
     private SalaDao salaDao;
+    
+    @Autowired
+    private SessaoDao sessaoDao;
 
 
     @GetMapping({"/admin/sala", "/admin/sala/{id}"})
@@ -64,8 +74,11 @@ public class SalaController {
 
         Sala sala = salaDao.findOne(id);
 
+        List<Sessao> listaDeSessoes = sessaoDao.buscaSessoesDaSala(sala);
+        
         ModelAndView view = new ModelAndView("sessao/lista");
         view.addObject("sala", sala);
+        view.addObject("sessoes", listaDeSessoes);
 
         return view;
     }
